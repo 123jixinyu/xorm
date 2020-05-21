@@ -209,6 +209,9 @@ func (engine *Engine) QuoteTo(buf *strings.Builder, value string) {
 
 	quotePair := engine.dialect.Quote("")
 
+	if(engine.DriverName()=="oci8"){
+		quotePair = "  "
+	}
 	if value[0] == '`' || len(quotePair) < 2 || value[0] == quotePair[0] { // no quote
 		_, _ = buf.WriteString(value)
 		return
